@@ -32,10 +32,12 @@ class _HomeState extends State<Home> {
     XFile? pickedFile =
         await imagePicker!.pickImage(source: ImageSource.camera);
     _image = File(pickedFile!.path);
-    setState(() {
-      _image;
-      doImageClassification();
-    });
+    _image == null
+        ? Navigator.of(context).pop
+        : setState(() {
+            _image;
+            doImageClassification();
+          });
   }
 
   loadDataModelFiles() async {
